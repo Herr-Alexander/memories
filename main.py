@@ -1,4 +1,4 @@
-import turtle, time
+import turtle, time, random
 
 """Квадрати"""
 
@@ -83,21 +83,45 @@ import turtle, time
 
 """Зоряне небо"""
 
-bob = turtle.Turtle()
-bob.color("yellow")
-bob.speed(1)
-
 def star_fill(n, dovgyna):
+    bob.left(random.randint(20, 300))
     bob.begin_fill()
     if n % 2 != 0:
-        for i in range(n):
+        for _ in range(n):
             bob.forward(dovgyna)
             angle = n // 2 * 360 / n
             bob.left(angle)
     bob.end_fill()
 
-star_fill(5, 150)
-
 window = turtle.Screen()
 window.bgcolor("black")
-time.sleep(5)
+window.setup(700, 500)
+
+bob = turtle.Turtle()
+bob.color("yellow")
+bob.hideturtle()
+bob.speed(0)
+
+for i in range(5):
+    x = random.randint(-300, 300)
+    y = random.randint(-200, 200)
+    bob.up()
+    bob.setposition(x, y)
+    bob.down()
+    size = random.randint(10, 50)
+    vershyna = random.randrange(7, 22, 2)
+    star_fill(vershyna, size)
+
+def click(x, y):
+    bob.up()
+    bob.setposition(x, y)
+    bob.down()
+    size = random.randint(10, 50)
+    vershyna = random.randrange(7, 22, 2)
+    star_fill(vershyna, size)
+
+window.onclick(click)
+window.listen()
+window.mainloop()
+
+# time.sleep(5)
